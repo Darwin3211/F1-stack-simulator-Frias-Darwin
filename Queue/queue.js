@@ -68,14 +68,14 @@ const queue = new Queue()
 
 //integration to webpage
 $(document).ready(function () {
-    $("#btn_push").on("click", function () {
+    $("#btn_enqueue").on("click", function () {
         let queue_data = queue.queue($("#st_data").val());
-        $("#stack").append(`<div id="st${queue_data[0]}" class="row bg-primary push">${queue_data}</div>`);
+        $("#queue").append(`<div id="st${queue_data[0]}" class="row bg-primary push">${queue_data}</div>`);
     });
 
-    $("#btn_pop").on("click", function () {
+    $("#btn_dequeue").on("click", function () {
         let dequeue_data = queue.dequeue();
-        $("#popped").append(`<div class="row pop text-bg-danger border border-light">${dequeue_data}</div>`);
+        $("#dequeue").append(`<div class="row pop text-bg-danger border border-light">${dequeue_data}</div>`);
         $(`#st${dequeue_data}`).remove();
     });
 
