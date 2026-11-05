@@ -1,0 +1,94 @@
+
+class Queue {
+    constructor() {
+        this.items = []
+        this.count = 0
+
+    }
+
+    // Add element to top of stack
+    queue(element) {
+        this.items[this.count] = element
+        let push_res = `${element}`; //console.log(`added to ${this.count}`);
+        this.count += 1;
+        let count = this.count - 1;
+        //return [push_res,count];
+        return [push_res, count];
+    }
+
+    // Return and remove top element in stack
+    // Return undefined if stack is empty
+    dequeue() {
+        if (this.count == 0) return undefined
+        let deleteItem = this.items.shift();
+         this.count -= 1
+        console.log(`${deleteItem} removed`)
+        return deleteItem
+    }
+
+    // Check top element in stack
+    peek() {
+        console.log(`Top element is ${this.items[0]}`)
+        let peek_data = this.items[0];
+        return peek_data
+    }
+
+    // Check if stack is empty
+    isEmpty() {
+        console.log(this.count == 0 ? 'Queue is empty' : 'Queue is NOT empty')
+        return this.count == 0
+    }
+
+    // Check size of stack
+    size() {
+        console.log(`${this.count} elements in stack`)
+        return this.count
+    }
+
+    // Print elements in stack
+    print() {
+        let str = ''
+        for (let i = 0; i < this.count; i++) {
+            str += this.items[i] + ' '
+        }
+        return str
+    }
+
+    // Clear stack
+    clear() {
+        this.items = []
+        this.count = 0
+        console.log('Queue cleared..')
+        return this.items
+    }
+}
+
+//instantiate new object
+const queue = new Queue()
+
+//integration to webpage
+$(document).ready(function () {
+    $("#btn_push").on("click", function () {
+        let queue_data = queue.queue($("#st_data").val());
+        $("#stack").append(`<div id="st${queue_data[0]}" class="row bg-primary push">${queue_data}</div>`);
+    });
+
+    $("#btn_pop").on("click", function () {
+        let dequeue_data = queue.dequeue();
+        $("#popped").append(`<div class="row pop text-bg-danger border border-light">${dequeue_data}</div>`);
+        $(`#st${dequeue_data}`).remove();
+    });
+
+    $("#btn_peek").on("click", function () {
+        let peek_data = queue.peek();
+        $(`#st${peek_data}`).removeClass("bg-primary").addClass("peek");
+        setTimeout(function () {
+            $(`#st${peek_data}`).removeClass("peek").addClass("bg-primary");
+        }, 500);
+    });
+
+    $("#btn_clear").on("click", function () {
+        queue.clear();
+        $("#stack, #popped").empty();
+    });
+});
