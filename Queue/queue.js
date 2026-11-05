@@ -41,7 +41,7 @@ class Queue {
 
     // Check size of stack
     size() {
-        console.log(`${this.count} elements in stack`)
+        console.log(`${this.count} elements in queue`)
         return this.count
     }
 
